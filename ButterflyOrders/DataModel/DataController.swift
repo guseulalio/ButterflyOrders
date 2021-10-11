@@ -67,7 +67,6 @@ class DataController
 			order.purchaseOrderNumber = "#KLS1023"
 			order.sentDate = nil
 			order.serverTimestamp = 0
-			//order.stockPurchaseProcessIDs = [0]
 			order.supplierId = 1
 			
 			for j in 1...Int.random(in: 3...10)
@@ -80,7 +79,7 @@ class DataController
 				item.activeFlag = true
 				item.productItemId = Int64.random(in: 1 ... Int64.max)
 				item.quantity = Int16.random(in: 1 ... 20)
-				item.transientIdentitier = "transID\(j)"
+				item.transientIdentifier = "transID\(j)"
 				
 				item.order = order
 			}
@@ -90,7 +89,7 @@ class DataController
 				let invoice = Invoice(context: context)
 				
 				invoice.id = Int64(k)
-				invoice.transientIdentitier =  "transID\(k)"
+				invoice.transientIdentifier =  "transID\(k)"
 				invoice.lastUpdatedUserEntityId = 1
 				invoice.lastUpdated = order.lastUpdated!.addingTimeInterval(Double.random(in: -120 ... 0))
 				invoice.activeFlag = true
@@ -130,7 +129,7 @@ class DataController
 			do {
 				try container.viewContext.save()
 			} catch {
-				print("Error saving context: \(error.localizedDescription)")
+				print("Error saving data in context: \(error.localizedDescription)")
 			}
 		}
 	}

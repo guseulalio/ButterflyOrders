@@ -43,16 +43,32 @@ class NetworkManager
 		
 		if let data = try? Data(contentsOf: url)
 		{
+			//let dataStr = String(data: data, encoding: String.Encoding.utf8)
+			//print("\n\n================")
+			//print(dataStr ?? "nothing")
+			//print("================\n\n")
+			
 			if let managedObjectContext = managedObjectContext {
 				let decoder = JSONDecoder()
 				decoder.userInfo[CodingUserInfoKey.managedObjectContext] = managedObjectContext
 				decoder.keyDecodingStrategy = .convertFromSnakeCase
+				//decoder.dateDecodingStrategy = .iso8601
+				let dateFormatter = DateFormatter()
+				dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+				decoder.dateDecodingStrategy = .formatted(dateFormatter)
+
 				
 				do {
 					orders = try decoder.decode([PurchaseOrder].self, from: data)
+					try? managedObjectContext.save()
 					completion(.success(orders))
 				} catch {
-					print("Error decoding data: \(error.localizedDescription)")
+					switch error {
+						case DecoderError.keyedDecodingError(let key):
+							print("Error decoding key `\(key)`")
+						default:
+							print("Error decoding data: \(error.localizedDescription)")
+					}
 					completion(.failure(.cannotDecodeData))
 				}
 			} else {
@@ -64,20 +80,4 @@ class NetworkManager
 			completion(.failure(.cannotFetchData))
 		}
 	}
-	
-//	func fetch(_ queryType: NetworkManager.QueryType) -> [LocationData]
-//	{
-//		var locationData = [LocationData]()
-//
-//		NetworkManager.shared.fetch(query: queryType)
-//		{ result in
-//			switch result {
-//				case .success(let locationList): locationData.append(contentsOf: locationList)
-//				case .failure(let error):
-//					switch error { case .error(let msg): print("Error: \(msg)") }
-//			}
-//		}
-//
-//		return locationData
-//	}
 }

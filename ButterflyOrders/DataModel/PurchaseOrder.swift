@@ -31,6 +31,13 @@ class PurchaseOrder
 			 invoices
 	}
 	
+	var itemList: [Item] { items?.allObjects as? [Item] ?? [] }
+	var invoiceList: [Invoice] { invoices?.allObjects as? [Invoice] ?? [] }
+	var noteForDelivery: String {
+		get { return deliveryNote ?? "" }
+		set { deliveryNote = newValue }
+	}
+	
 	required convenience init(from decoder: Decoder)
 	throws
 	{
@@ -42,22 +49,32 @@ class PurchaseOrder
 		self.init(context: context)
 		
 		let container = try decoder.container(keyedBy: CodingKeys.self)
-		self.id 			= try container.decode(Int64.self, forKey: .id)
-		self.lastUpdated 	= try container.decode(Date.self, forKey: .lastUpdated)
-		self.lastUpdatedUserEntityId = try container.decode(Int64.self, forKey: .lastUpdatedUserEntityId)
-		self.activeFlag 	= try container.decode(Bool.self, forKey: .activeFlag)
-		self.approvalStatus = try container.decode(Int16.self, forKey: .approvalStatus)
-		self.deliveryNote 	= try container.decode(String.self, forKey: .deliveryNote)
-		self.deviceKey 		= try container.decode(String.self, forKey: .deviceKey)
-		self.issueDate 		= try container.decode(Date.self, forKey: .issueDate)
-		self.preferredDeliveryDate 	= try container.decode(Date.self, forKey: .preferredDeliveryDate)
-		self.purchaseOrderNumber 	= try container.decode(String.self, forKey: .purchaseOrderNumber)
-		self.sentDate 		= try container.decode(Date.self, forKey: .sentDate)
-		self.serverTimestamp		= try container.decode(Int64.self, forKey: .serverTimestamp)
-		self.status 		= try container.decode(Int16.self, forKey: .status)
-		self.supplierId 	= try container.decode(Int64.self, forKey: .supplierId)
-		self.items 			= try container.decode(Set<Item>.self, forKey: .items) as NSSet
-		self.invoices 		= try container.decode(Set<Invoice>.self, forKey: .invoices) as NSSet
+		try attempt ({ self.id = try container.decode(Int64.self, forKey: .id) }, forKey: "id")
+		try attempt ({ self.lastUpdated = try container.decode(Date.self, forKey: .lastUpdated) }, forKey: "ORDER.lastUpdated")
+		try attempt ({ self.lastUpdatedUserEntityId = try container.decode(Int64.self, forKey: .lastUpdatedUserEntityId) }, forKey: "lastUpdatedUserEntityId")
+		try attempt ({ self.activeFlag = try container.decode(Bool.self, forKey: .activeFlag) }, forKey: "activeFlag")
+		try attempt ({ self.approvalStatus = try container.decode(Int16.self, forKey: .approvalStatus) }, forKey: "approvalStatus")
+		try attempt ({ self.deliveryNote = try container.decode(String.self, forKey: .deliveryNote) }, forKey: "deliveryNote")
+		try attempt ({ self.deviceKey = try container.decode(String.self, forKey: .deviceKey) }, forKey: "deviceKey")
+		try attempt ({ self.issueDate = try container.decode(Date.self, forKey: .issueDate) }, forKey: "issueDate")
+		try attempt ({ self.preferredDeliveryDate = try container.decode(Date.self, forKey: .preferredDeliveryDate) }, forKey: "preferredDeliveryDate")
+		try attempt ({ self.purchaseOrderNumber = try container.decode(String.self, forKey: .purchaseOrderNumber) }, forKey: "purchaseOrderNumber")
+		try attempt ({ self.sentDate = try container.decode(Date.self, forKey: .sentDate) }, forKey: "sentDate")
+		try attempt ({ self.serverTimestamp = try container.decode(Int64.self, forKey: .serverTimestamp) }, forKey: "serverTimestamp")
+		try attempt ({ self.status = try container.decode(Int16.self, forKey: .status) }, forKey: "status")
+		try attempt ({ self.supplierId = try container.decode(Int64.self, forKey: .supplierId) }, forKey: "supplierId")
+		try attempt ({ self.items = try container.decode(Set<Item>.self, forKey: .items) as NSSet }, forKey: "items")
+		try attempt ({ self.invoices = try container.decode(Set<Invoice>.self, forKey: .invoices) as NSSet }, forKey: "invoices")
+	}
+	
+	func attempt(_ block: ThrowingBlock, forKey key: String)
+	throws
+	{
+		do { try block() }
+		catch {
+			print("\n\nError decoding: \(key)\n\n")
+			throw DecoderError.keyedDecodingError(key)
+		}
 	}
 	
 	func encode(to encoder: Encoder)

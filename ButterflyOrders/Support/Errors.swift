@@ -8,6 +8,8 @@
 import Foundation
 
 
+typealias ThrowingBlock = () throws -> Void
+
 enum ErrorWithMessage
 : Error, Equatable
 { case error(String) }
@@ -25,4 +27,5 @@ enum DecoderError
 : Error
 {
 	case missingManagedObjectContext
+	case keyedDecodingError(String)
 }

@@ -35,15 +35,25 @@ class Receipt
 		self.init(context: context)
 		
 		let container = try decoder.container(keyedBy: CodingKeys.self)
-		self.id 			= try container.decode(Int64.self, forKey: .id)
-		self.created 		= try container.decode(Date.self, forKey: .created)
-		self.lastUpdated 	= try container.decode(Date.self, forKey: .lastUpdated)
-		self.lastUpdatedUserEntityId = try container.decode(Int64.self, forKey: .lastUpdatedUserEntityId)
-		self.activeFlag 	= try container.decode(Bool.self, forKey: .activeFlag)
-		self.transientIdentifier = try container.decode(String.self, forKey: .transientIdentifier)
-		self.productItemId 	= try container.decode(Int64.self, forKey: .productItemId)
-		self.receivedQuantity = try container.decode(Int16.self, forKey: .receivedQuantity)
-		self.sentDate 		= try container.decode(Date.self, forKey: .sentDate)
+		try attempt ({ self.id = try container.decode(Int64.self, forKey: .id) }, forKey: "id")
+		try attempt ({ self.created = try container.decode(Date.self, forKey: .created) }, forKey: "created")
+		try attempt ({ self.lastUpdated = try container.decode(Date.self, forKey: .lastUpdated) }, forKey: "RECEIPT.lastUpdated")
+		try attempt ({ self.lastUpdatedUserEntityId = try container.decode(Int64.self, forKey: .lastUpdatedUserEntityId) }, forKey: "lastUpdatedUserEntityId")
+		try attempt ({ self.activeFlag = try container.decode(Bool.self, forKey: .activeFlag) }, forKey: "activeFlag")
+		try attempt ({ self.transientIdentifier = try container.decode(String.self, forKey: .transientIdentifier) }, forKey: "transientIdentifier")
+		try attempt ({ self.productItemId = try container.decode(Int64.self, forKey: .productItemId) }, forKey: "productItemId")
+		try attempt ({ self.receivedQuantity = try container.decode(Int16.self, forKey: .receivedQuantity) }, forKey: "receivedQuantity")
+		try attempt ({ self.sentDate = try container.decode(Date.self, forKey: .sentDate) }, forKey: "sentDate")
+	}
+	
+	func attempt(_ block: ThrowingBlock, forKey key: String)
+	throws
+	{
+		do { try block() }
+		catch {
+			print("\n\nError decoding: \(key)\n\n")
+			throw DecoderError.keyedDecodingError(key)
+		}
 	}
 	
 	func encode(to encoder: Encoder)

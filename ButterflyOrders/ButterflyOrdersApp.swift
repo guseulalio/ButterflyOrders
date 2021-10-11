@@ -5,6 +5,7 @@
 //  Created by Gustavo E M Cabral on 9/10/21.
 //
 
+import CoreData
 import SwiftUI
 
 @main
@@ -17,13 +18,14 @@ struct ButterflyOrdersApp
 	{
 		let dataController = DataController()
 		_dataController = StateObject(wrappedValue: dataController)
+		dataController.container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
 	}
 	
     var body: some Scene
 	{
         WindowGroup
 		{
-            ContentView()
+            OrderListView()
 			.environment(\.managedObjectContext, dataController.container.viewContext)
 			.environmentObject(dataController)
         }

@@ -18,7 +18,7 @@ class Invoice
 			 lastUpdated,
 			 lastUpdatedUserEntityId,
 			 activeFlag,
-			 transientIdentitier,
+			 transientIdentifier,
 			 invoiceNumber,
 			 receiptSentDate,
 			 receivedStatus,
@@ -36,16 +36,26 @@ class Invoice
 		self.init(context: context)
 		
 		let container 		= try decoder.container(keyedBy: CodingKeys.self)
-		self.id 			= try container.decode(Int64.self, forKey: .id)
-		self.created 		= try container.decode(Date.self, forKey: .created)
-		self.lastUpdated 	= try container.decode(Date.self, forKey: .lastUpdated)
-		self.lastUpdatedUserEntityId = try container.decode(Int64.self, forKey: .lastUpdatedUserEntityId)
-		self.activeFlag 	= try container.decode(Bool.self, forKey: .activeFlag)
-		self.transientIdentitier = try container.decode(String.self, forKey: .transientIdentitier)
-		self.invoiceNumber 	= try container.decode(String.self, forKey: .invoiceNumber)
-		self.receiptSentDate = try container.decode(Date.self, forKey: .receiptSentDate)
-		self.receivedStatus = try container.decode(Int16.self, forKey: .receivedStatus)
-		self.receipts 		= try container.decode(Set<Receipt>.self, forKey: .receipts) as NSSet
+		try attempt ({ self.id = try container.decode(Int64.self, forKey: .id) }, forKey: "id")
+		try attempt ({ self.created = try container.decode(Date.self, forKey: .created) }, forKey: "created")
+		try attempt ({ self.lastUpdated = try container.decode(Date.self, forKey: .lastUpdated) }, forKey: "INVOICE.lastUpdated")
+		try attempt ({ self.lastUpdatedUserEntityId = try container.decode(Int64.self, forKey: .lastUpdatedUserEntityId) }, forKey: "lastUpdatedUserEntityId")
+		try attempt ({ self.activeFlag = try container.decode(Bool.self, forKey: .activeFlag) }, forKey: "activeFlag")
+		try attempt ({ self.transientIdentifier = try container.decode(String.self, forKey: .transientIdentifier) }, forKey: "transientIdentifier")
+		try attempt ({ self.invoiceNumber = try container.decode(String.self, forKey: .invoiceNumber) }, forKey: "invoiceNumber")
+		try attempt ({ self.receiptSentDate = try container.decode(Date.self, forKey: .receiptSentDate) }, forKey: "receiptSentDate")
+		try attempt ({ self.receivedStatus = try container.decode(Int16.self, forKey: .receivedStatus) }, forKey: "receivedStatus")
+		try attempt ({ self.receipts = try container.decode(Set<Receipt>.self, forKey: .receipts) as NSSet }, forKey: "receipts")
+	}
+	
+	func attempt(_ block: ThrowingBlock, forKey key: String)
+	throws
+	{
+		do { try block() }
+		catch {
+			print("\n\nError decoding: \(key)\n\n")
+			throw DecoderError.keyedDecodingError(key)
+		}
 	}
 	
 	func encode(to encoder: Encoder)
@@ -58,7 +68,7 @@ class Invoice
 		try container.encode(lastUpdated, forKey: .lastUpdated)
 		try container.encode(lastUpdatedUserEntityId, forKey: .lastUpdatedUserEntityId)
 		try container.encode(activeFlag, forKey: .activeFlag)
-		try container.encode(transientIdentitier, forKey: .transientIdentitier)
+		try container.encode(transientIdentifier, forKey: .transientIdentifier)
 		try container.encode(invoiceNumber, forKey: .invoiceNumber)
 		try container.encode(receiptSentDate, forKey: .receiptSentDate)
 		try container.encode(receivedStatus, forKey: .receivedStatus)

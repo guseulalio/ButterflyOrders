@@ -9,9 +9,14 @@
         <attribute name="lastUpdatedUserEntityId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="receiptSentDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="receivedStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="transientIdentitier" optional="YES" attributeType="String"/>
+        <attribute name="transientIdentifier" optional="YES" attributeType="String"/>
         <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PurchaseOrder" inverseName="invoices" inverseEntity="PurchaseOrder"/>
         <relationship name="receipts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Receipt" inverseName="invoice" inverseEntity="Receipt"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="Item" representedClassName=".Item" syncable="YES" codeGenerationType="category">
         <attribute name="activeFlag" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -20,15 +25,20 @@
         <attribute name="lastUpdatedUserEntityId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="productItemId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="transientIdentitier" optional="YES" attributeType="String"/>
+        <attribute name="transientIdentifier" optional="YES" attributeType="String"/>
         <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PurchaseOrder" inverseName="items" inverseEntity="PurchaseOrder"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="PurchaseOrder" representedClassName=".PurchaseOrder" syncable="YES" codeGenerationType="category">
         <attribute name="activeFlag" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="approvalStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="deliveryNote" optional="YES" attributeType="String"/>
         <attribute name="deviceKey" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="issueDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="lastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="lastUpdatedUserEntityId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -40,6 +50,11 @@
         <attribute name="supplierId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="invoices" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Invoice" inverseName="order" inverseEntity="Invoice"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="order" inverseEntity="Item"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="Receipt" representedClassName=".Receipt" syncable="YES" codeGenerationType="category">
         <attribute name="activeFlag" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -52,11 +67,16 @@
         <attribute name="sentDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="transientIdentifier" optional="YES" attributeType="String"/>
         <relationship name="invoice" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Invoice" inverseName="receipts" inverseEntity="Invoice"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="PurchaseOrder" positionX="-63" positionY="-18" width="128" height="269"/>
-        <element name="Item" positionX="-36" positionY="117" width="128" height="149"/>
         <element name="Invoice" positionX="-27" positionY="144" width="128" height="194"/>
+        <element name="Item" positionX="-36" positionY="117" width="128" height="149"/>
+        <element name="PurchaseOrder" positionX="-63" positionY="-18" width="128" height="269"/>
         <element name="Receipt" positionX="-9" positionY="180" width="128" height="179"/>
     </elements>
 </model>
