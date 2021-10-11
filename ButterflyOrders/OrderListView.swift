@@ -24,8 +24,7 @@ struct OrderListView
 					ForEach(orders)
 					{ order in
 						NavigationLink {
-							Text("Order \(order.id)'s details")
-//							OrderDetailsView(order: order)
+							OrderDetailsView(order: order)
 						} label: {
 							VStack(alignment: .leading) {
 								HStack {
