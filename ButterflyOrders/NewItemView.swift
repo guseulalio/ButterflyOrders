@@ -36,15 +36,8 @@ struct NewItemView: View {
 			
 			HStack {
 				Spacer()
-				Button(action: saveButtonTapped) {
-					Text("Save")
-					.frame(width: 68)
-					.padding(.horizontal, 12).padding(.vertical, 8)
-					.background(Color.red)
-					.foregroundColor(.white)
-					.clipShape(Capsule())
-					.padding()
-				}
+				CapsuleButton(title: "Save", action: saveButtonTapped, backgroundColor: .red, width: 80)
+				.padding()
 			}
 		}
 	}

@@ -36,6 +36,10 @@ class NetworkManager
 		}
 	}
 	
+	/// Retrieves the data from the URL
+	/// - Parameters:
+	///   - url: URL to fetch the data from
+	///   - completion: block to be executed on completion of the fetch
 	private func retrieveData(from url: URL,
 					  onCompletion completion: @escaping NetworkManagerCallBack)
 	{
@@ -52,11 +56,10 @@ class NetworkManager
 				let decoder = JSONDecoder()
 				decoder.userInfo[CodingUserInfoKey.managedObjectContext] = managedObjectContext
 				decoder.keyDecodingStrategy = .convertFromSnakeCase
-				//decoder.dateDecodingStrategy = .iso8601
+				
 				let dateFormatter = DateFormatter()
 				dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
 				decoder.dateDecodingStrategy = .formatted(dateFormatter)
-
 				
 				do {
 					orders = try decoder.decode([PurchaseOrder].self, from: data)

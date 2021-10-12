@@ -13,6 +13,9 @@ class DataController
 {
 	let container: NSPersistentCloudKitContainer
 	
+	/// Initializes a new DataController object
+	/// - Parameter inMemory: allows the data to be created and managed in memory,
+	/// as opposed to the DB itself. Useful for testing.
 	init(inMemory: Bool = false)
 	{
 		container = NSPersistentCloudKitContainer(name: "Main")

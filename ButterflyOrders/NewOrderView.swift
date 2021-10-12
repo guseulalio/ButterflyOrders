@@ -28,14 +28,7 @@ struct NewOrderView
 			Section(header: Text("Items")) {
 				HStack {
 					Spacer()
-					Button(action: newItemButtonTapped) {
-						Text("New item")
-						.frame(width: 78)
-						.padding(.horizontal, 12).padding(.vertical, 6)
-						.background(Color.blue)
-						.foregroundColor(.white)
-						.clipShape(Capsule())
-					}
+					CapsuleButton(title: "New item", action: newItemButtonTapped, backgroundColor: .blue, width: 90)
 				}
 				List(items)
 				{ item in
@@ -54,14 +47,7 @@ struct NewOrderView
 			Section(header: Text("Invoices")) {
 				HStack {
 					Spacer()
-					Button(action: newInvoiceButtonTapped) {
-						Text("New invoice")
-						.frame(width: 98)
-						.padding(.horizontal, 12).padding(.vertical, 6)
-						.background(Color.blue)
-						.foregroundColor(.white)
-						.clipShape(Capsule())
-					}
+					CapsuleButton(title: "New invoice", action: newInvoiceButtonTapped, backgroundColor: .blue, width: 110)
 				}
 				List(invoices)
 				{ invoice in
@@ -79,14 +65,8 @@ struct NewOrderView
 			
 			HStack {
 				Spacer()
-				Button(action: saveButtonTapped) {
-					Text("Save")
-					.frame(width: 68)
-					.padding(.horizontal, 12).padding(.vertical, 8)
-					.background(Color.red)
-					.foregroundColor(.white)
-					.clipShape(Capsule())
-				}
+				CapsuleButton(title: "Save", action: saveButtonTapped, backgroundColor: .red, width: 80)
+				.padding()
 			}
 		}
     }
