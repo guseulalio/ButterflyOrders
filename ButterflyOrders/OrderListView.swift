@@ -17,6 +17,7 @@ struct OrderListView
 	) var orders: FetchedResults<PurchaseOrder>
 	
 	@State private var buttonRotation = 0.0
+	@State private var addingNewOrder = false
 	
     var body: some View {
 		NavigationView {
@@ -78,23 +79,15 @@ struct OrderListView
 	
 	var addButton: some View {
 		Button {
-			print("Pressed +")
+			addingNewOrder = true
 		} label: {
-			Label("New order", systemImage: "plus.circle")
-				.font(.body.weight(Font.Weight.bold))
-				.rotationEffect(.degrees(buttonRotation))
+			NavigationLink(isActive: $addingNewOrder) {
+				NewOrderView()
+			} label: {
+				Label("New order", systemImage: "plus.circle")
+					.font(.body.weight(Font.Weight.bold))
+					.rotationEffect(.degrees(buttonRotation))
+			}
 		}
 	}
-}
-
-struct OrderListView_Previews
-: PreviewProvider
-{
-	static var dataController = DataController.preview
-	
-    static var previews: some View {
-        OrderListView()
-		.environment(\.managedObjectContext, dataController.container.viewContext)
-		.environmentObject(dataController)
-    }
 }
