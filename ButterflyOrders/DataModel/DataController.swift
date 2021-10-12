@@ -54,10 +54,10 @@ class DataController
 	{
 		let now = Date()
 		
-		for i in 1...10
+		for _ in 1...10
 		{
 			let order = PurchaseOrder(context: context)
-			order.id = Int64(i)
+			order.id = Int64.random(in: 0...Int64.max)
 			order.status = 1
 			order.activeFlag = true
 			order.approvalStatus = 1
@@ -76,7 +76,7 @@ class DataController
 			{
 				let item = Item(context: context)
 				
-				item.id = Int64(j)
+				item.id = Int64.random(in: 0...Int64.max)
 				item.lastUpdatedUserEntityId = 1
 				item.lastUpdated = order.lastUpdated!.addingTimeInterval(Double.random(in: -120 ... 0))
 				item.activeFlag = true
@@ -91,7 +91,7 @@ class DataController
 			{
 				let invoice = Invoice(context: context)
 				
-				invoice.id = Int64(k)
+				invoice.id = Int64.random(in: 0...Int64.max)
 				invoice.transientIdentifier =  "transID\(k)"
 				invoice.lastUpdatedUserEntityId = 1
 				invoice.lastUpdated = order.lastUpdated!.addingTimeInterval(Double.random(in: -120 ... 0))
@@ -105,7 +105,7 @@ class DataController
 				{
 					let receipt = Receipt(context: context)
 					
-					receipt.id = Int64(r)
+					receipt.id = Int64.random(in: 0...Int64.max)
 					receipt.created = invoice.created!
 					receipt.productItemId = Int64.random(in: 1 ... Int64.max)
 					receipt.activeFlag = true
@@ -178,4 +178,10 @@ class DataController
 		case allInTable(NSManagedObject.Type)
 		case object(NSManagedObject)
 	}
+	
+	/// Counts the amount of objects returned in a fetch request.
+	/// - Parameter fetchRequest: `NSFetchRequest` object to be counted.
+	/// - Returns: Number of objects returned by the fetch request. Returns zero if unable to count.
+	func count<T>(for fetchRequest: NSFetchRequest<T>) -> Int
+	{ (try? container.viewContext.count(for: fetchRequest)) ?? 0 }
 }

@@ -26,7 +26,19 @@
 		9C7AA68F271445270032013F /* NewOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AA68E271445270032013F /* NewOrderView.swift */; };
 		9C7AA691271534650032013F /* NewItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AA690271534640032013F /* NewItemView.swift */; };
 		9C7AA694271541AF0032013F /* CapsuleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AA693271541AF0032013F /* CapsuleButton.swift */; };
+		9C7AA69C27154D4D0032013F /* PurchaseOrderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AA69B27154D4D0032013F /* PurchaseOrderTests.swift */; };
+		9C7AA6A327154D860032013F /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AA6A227154D860032013F /* BaseTestCase.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9C7AA69D27154D4D0032013F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C7688D927114BE900CA490A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C7688E027114BE900CA490A;
+			remoteInfo = ButterflyOrders;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		9C7688E127114BE900CA490A /* ButterflyOrders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ButterflyOrders.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +63,9 @@
 		9C7AA68E271445270032013F /* NewOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrderView.swift; sourceTree = "<group>"; };
 		9C7AA690271534640032013F /* NewItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewItemView.swift; sourceTree = "<group>"; };
 		9C7AA693271541AF0032013F /* CapsuleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleButton.swift; sourceTree = "<group>"; };
+		9C7AA69927154D4D0032013F /* ButterflyOrdersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ButterflyOrdersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C7AA69B27154D4D0032013F /* PurchaseOrderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrderTests.swift; sourceTree = "<group>"; };
+		9C7AA6A227154D860032013F /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +77,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9C7AA69627154D4D0032013F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -69,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				9C7688E327114BE900CA490A /* ButterflyOrders */,
+				9C7AA69A27154D4D0032013F /* ButterflyOrdersTests */,
 				9C7688E227114BE900CA490A /* Products */,
 				9C7688FE2712B8A200CA490A /* Frameworks */,
 			);
@@ -78,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				9C7688E127114BE900CA490A /* ButterflyOrders.app */,
+				9C7AA69927154D4D0032013F /* ButterflyOrdersTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -157,6 +181,15 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		9C7AA69A27154D4D0032013F /* ButterflyOrdersTests */ = {
+			isa = PBXGroup;
+			children = (
+				9C7AA6A227154D860032013F /* BaseTestCase.swift */,
+				9C7AA69B27154D4D0032013F /* PurchaseOrderTests.swift */,
+			);
+			path = ButterflyOrdersTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -177,6 +210,24 @@
 			productReference = 9C7688E127114BE900CA490A /* ButterflyOrders.app */;
 			productType = "com.apple.product-type.application";
 		};
+		9C7AA69827154D4D0032013F /* ButterflyOrdersTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C7AA69F27154D4D0032013F /* Build configuration list for PBXNativeTarget "ButterflyOrdersTests" */;
+			buildPhases = (
+				9C7AA69527154D4D0032013F /* Sources */,
+				9C7AA69627154D4D0032013F /* Frameworks */,
+				9C7AA69727154D4D0032013F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9C7AA69E27154D4D0032013F /* PBXTargetDependency */,
+			);
+			name = ButterflyOrdersTests;
+			productName = ButterflyOrdersTests;
+			productReference = 9C7AA69927154D4D0032013F /* ButterflyOrdersTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -189,6 +240,10 @@
 				TargetAttributes = {
 					9C7688E027114BE900CA490A = {
 						CreatedOnToolsVersion = 13.0;
+					};
+					9C7AA69827154D4D0032013F = {
+						CreatedOnToolsVersion = 13.0;
+						TestTargetID = 9C7688E027114BE900CA490A;
 					};
 				};
 			};
@@ -206,6 +261,7 @@
 			projectRoot = "";
 			targets = (
 				9C7688E027114BE900CA490A /* ButterflyOrders */,
+				9C7AA69827154D4D0032013F /* ButterflyOrdersTests */,
 			);
 		};
 /* End PBXProject section */
@@ -218,6 +274,13 @@
 				9C7688EC27114BEE00CA490A /* Preview Assets.xcassets in Resources */,
 				9C7688F327114C1400CA490A /* SampleData.json in Resources */,
 				9C7688E927114BEE00CA490A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C7AA69727154D4D0032013F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,7 +309,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9C7AA69527154D4D0032013F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C7AA6A327154D860032013F /* BaseTestCase.swift in Sources */,
+				9C7AA69C27154D4D0032013F /* PurchaseOrderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9C7AA69E27154D4D0032013F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C7688E027114BE900CA490A /* ButterflyOrders */;
+			targetProxy = 9C7AA69D27154D4D0032013F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		9C7688ED27114BEE00CA490A /* Debug */ = {
@@ -429,6 +509,52 @@
 			};
 			name = Release;
 		};
+		9C7AA6A027154D4D0032013F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3B38BF3GR9;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gustavoeulalio.ButterflyOrdersTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ButterflyOrders.app/ButterflyOrders";
+			};
+			name = Debug;
+		};
+		9C7AA6A127154D4D0032013F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3B38BF3GR9;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gustavoeulalio.ButterflyOrdersTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ButterflyOrders.app/ButterflyOrders";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -446,6 +572,15 @@
 			buildConfigurations = (
 				9C7688F027114BEE00CA490A /* Debug */,
 				9C7688F127114BEE00CA490A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9C7AA69F27154D4D0032013F /* Build configuration list for PBXNativeTarget "ButterflyOrdersTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C7AA6A027154D4D0032013F /* Debug */,
+				9C7AA6A127154D4D0032013F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
